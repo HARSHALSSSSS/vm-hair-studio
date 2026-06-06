@@ -12,7 +12,7 @@ const slides = [
   { src: '/hero-slides/6.webp', mobileSrc: '/hero-slides/6-mobile.webp', alt: 'Salon exterior view 6' },
 ] as const
 
-const heroAccentColor = '#E5E7EB'
+const heroAccentColor = '#F5C542'
 
 function preloadSlide(index: number) {
   const slide = slides[index]
@@ -128,7 +128,7 @@ export function Hero() {
       <div
         className="absolute inset-0 w-full h-full"
         style={{
-          background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.14), rgba(0, 0, 0, 0.08))',
+          background: 'linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 45%, rgba(0, 0, 0, 0.12) 100%)',
         }}
       />
 
@@ -153,9 +153,9 @@ export function Hero() {
               className="inline-block px-4 py-1.5 rounded-full text-sm font-semibold tracking-wide"
               style={{
                 color: heroAccentColor,
-                backgroundColor: 'rgba(255, 255, 255, 0.12)',
-                border: '1px solid rgba(229, 231, 235, 0.45)',
-                textShadow: '0 1px 10px rgba(0, 0, 0, 0.5)',
+                backgroundColor: 'rgba(245, 197, 66, 0.15)',
+                border: '1px solid rgba(245, 197, 66, 0.45)',
+                textShadow: '0 1px 8px rgba(0, 0, 0, 0.7)',
               }}
             >
               Premium Hair Studio in Pune
@@ -176,10 +176,11 @@ export function Hero() {
           >
             Redefine Your Style with{' '}
             <span
+              className="text-[#F5C542]"
               style={{
-                color: heroAccentColor,
                 fontStyle: 'italic',
-                textShadow: '0 2px 16px rgba(0, 0, 0, 0.65), 0 0 20px rgba(0, 0, 0, 0.4)',
+                textShadow:
+                  '0 2px 4px rgba(0, 0, 0, 0.9), 0 4px 20px rgba(0, 0, 0, 0.65), 0 0 32px rgba(245, 197, 66, 0.35)',
               }}
             >
               Expert Hair Artistry
