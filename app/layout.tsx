@@ -38,6 +38,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`bg-background ${_playfairDisplay.variable} ${_inter.variable}`}>
+      <head>
+        <link
+          rel="preload"
+          as="image"
+          href="/hero-slides/1.webp"
+          type="image/webp"
+          media="(min-width: 769px)"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="/hero-slides/1-mobile.webp"
+          type="image/webp"
+          media="(max-width: 768px)"
+        />
+      </head>
       <body className="font-sans antialiased">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}

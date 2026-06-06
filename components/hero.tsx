@@ -1,28 +1,71 @@
 'use client'
 
-import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
 const slides = [
-  { src: '/hero-slides/1.JPG', alt: 'Salon interior view 1' },
-  { src: '/hero-slides/2.JPG', alt: 'Salon interior view 2' },
-  { src: '/hero-slides/3.JPG', alt: 'Salon interior view 3' },
-  { src: '/hero-slides/4.JPG', alt: 'Salon interior view 4' },
-  { src: '/hero-slides/5.JPG', alt: 'Salon interior view 5' },
-  { src: '/hero-slides/6.JPG', alt: 'Salon exterior view 6' }
-]
+  { src: '/hero-slides/1.webp', mobileSrc: '/hero-slides/1-mobile.webp', alt: 'Salon interior view 1' },
+  { src: '/hero-slides/2.webp', mobileSrc: '/hero-slides/2-mobile.webp', alt: 'Salon interior view 2' },
+  { src: '/hero-slides/3.webp', mobileSrc: '/hero-slides/3-mobile.webp', alt: 'Salon interior view 3' },
+  { src: '/hero-slides/4.webp', mobileSrc: '/hero-slides/4-mobile.webp', alt: 'Salon interior view 4' },
+  { src: '/hero-slides/5.webp', mobileSrc: '/hero-slides/5-mobile.webp', alt: 'Salon interior view 5' },
+  { src: '/hero-slides/6.webp', mobileSrc: '/hero-slides/6-mobile.webp', alt: 'Salon exterior view 6' },
+] as const
+
+function preloadSlide(index: number) {
+  const slide = slides[index]
+  if (!slide) return
+
+  const mobile = window.matchMedia('(max-width: 768px)').matches
+  const img = new window.Image()
+  img.src = mobile ? slide.mobileSrc : slide.src
+}
+
+function HeroSlide({
+  slide,
+  visible,
+  priority = false,
+}: {
+  slide: (typeof slides)[number]
+  visible: boolean
+  priority?: boolean
+}) {
+  return (
+    <div
+      className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
+      style={{
+        opacity: visible ? 1 : 0,
+        willChange: 'opacity',
+      }}
+      aria-hidden={!visible}
+    >
+      <picture>
+        <source media="(max-width: 768px)" srcSet={slide.mobileSrc} type="image/webp" />
+        <img
+          src={slide.src}
+          alt={slide.alt}
+          className="h-full w-full object-cover object-center"
+          loading={priority ? 'eager' : 'lazy'}
+          decoding="async"
+          fetchPriority={priority ? 'high' : 'auto'}
+          draggable={false}
+        />
+      </picture>
+    </div>
+  )
+}
 
 export function Hero() {
   const [offset, setOffset] = useState(0)
   const [activeSlide, setActiveSlide] = useState(0)
+  const [loadedSlides, setLoadedSlides] = useState<Set<number>>(() => new Set([0]))
 
   useEffect(() => {
     const handleScroll = () => {
       setOffset(window.scrollY * 0.4)
     }
 
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
@@ -34,59 +77,70 @@ export function Hero() {
     return () => window.clearInterval(timer)
   }, [])
 
+  useEffect(() => {
+    const next = (activeSlide + 1) % slides.length
+    preloadSlide(next)
+
+    setLoadedSlides((current) => {
+      if (current.has(next)) return current
+      const updated = new Set(current)
+      updated.add(next)
+      return updated
+    })
+  }, [activeSlide])
+
+  useEffect(() => {
+    const idleCallback = window.requestIdleCallback ?? ((cb: () => void) => window.setTimeout(cb, 1200))
+    const cancelIdleCallback = window.cancelIdleCallback ?? window.clearTimeout
+
+    const id = idleCallback(() => {
+      slides.forEach((_, index) => {
+        if (index > 1) preloadSlide(index)
+      })
+    })
+
+    return () => cancelIdleCallback(id)
+  }, [])
+
   return (
     <section id="home" className="relative w-full min-h-screen overflow-hidden">
-      {/* Image Slideshow Background */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          transform: `translateY(${offset * -0.15}px)`
+          transform: `translate3d(0, ${offset * -0.15}px, 0)`,
+          willChange: 'transform',
         }}
       >
-        {slides.map((slide, index) => (
-          <motion.div
-            key={slide.src}
-            className="absolute inset-0"
-            initial={false}
-            animate={{
-              opacity: index === activeSlide ? 1 : 0,
-              scale: index === activeSlide ? 1 : 1.04
-            }}
-            transition={{
-              duration: 1.15,
-              ease: 'easeInOut'
-            }}
-          >
-            <Image
-              src={slide.src}
-              alt={slide.alt}
-              fill
+        {slides.map((slide, index) =>
+          loadedSlides.has(index) ? (
+            <HeroSlide
+              key={slide.src}
+              slide={slide}
+              visible={index === activeSlide}
               priority={index === 0}
-              sizes="100vw"
-              className="object-cover object-center"
             />
-          </motion.div>
-        ))}
+          ) : null
+        )}
       </div>
 
-      {/* Dark Overlay on Slideshow */}
       <div
         className="absolute inset-0 w-full h-full"
         style={{
-          background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.14), rgba(0, 0, 0, 0.08))'
+          background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.14), rgba(0, 0, 0, 0.08))',
         }}
       />
 
-      {/* Floating Hair Strand Texture - Subtle Premium Element */}
-      <div className="absolute inset-0 opacity-10" style={{
-        backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(184, 165, 150, 0.1), transparent 50%), radial-gradient(circle at 80% 80%, rgba(184, 165, 150, 0.1), transparent 50%)',
-        pointerEvents: 'none'
-      }} />
+      <div
+        className="absolute inset-0 opacity-10"
+        style={{
+          backgroundImage:
+            'radial-gradient(circle at 20% 50%, rgba(184, 165, 150, 0.1), transparent 50%), radial-gradient(circle at 80% 80%, rgba(184, 165, 150, 0.1), transparent 50%)',
+          pointerEvents: 'none',
+        }}
+      />
 
-      {/* Content */}
       <div className="relative h-screen flex items-center px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl w-full pl-0 sm:pl-4 lg:pl-12">
-          {/* Tagline */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -107,11 +161,13 @@ export function Hero() {
               fontFamily: "'Playfair Display', serif",
               textShadow: '0 4px 20px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.4)',
               fontWeight: 400,
-              letterSpacing: '-0.02em'
+              letterSpacing: '-0.02em',
             }}
           >
             Redefine Your Style with{' '}
-            <span className="text-amber-300" style={{ fontStyle: 'italic' }}>Expert Hair Artistry</span>
+            <span className="text-amber-300" style={{ fontStyle: 'italic' }}>
+              Expert Hair Artistry
+            </span>
           </motion.h1>
 
           <motion.p
@@ -122,7 +178,7 @@ export function Hero() {
             style={{
               textShadow: '0 2px 10px rgba(0, 0, 0, 0.4)',
               fontFamily: "'Inter', sans-serif",
-              letterSpacing: '0.01em'
+              letterSpacing: '0.01em',
             }}
           >
             Experience precision cuts, luxury treatments, and personalized styling tailored just for you at VM Hair Studio.
@@ -150,7 +206,6 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
       <motion.div
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
@@ -158,18 +213,8 @@ export function Hero() {
       >
         <div className="text-white/60 text-center">
           <p className="text-xs uppercase tracking-widest mb-3">Scroll to explore</p>
-          <svg
-            className="w-5 h-5 mx-auto"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={1.5}
-              d="M19 14l-7 7m0 0l-7-7m7 7V3"
-            />
+          <svg className="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
           </svg>
         </div>
       </motion.div>
