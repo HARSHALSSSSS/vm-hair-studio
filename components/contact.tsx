@@ -115,7 +115,7 @@ export function Contact() {
           viewport={{ once: true }}
         >
           <motion.h2 
-            className="text-4xl sm:text-5xl font-light text-foreground mb-4 tracking-tight"
+            className="text-3xl sm:text-5xl font-light text-foreground mb-4 tracking-tight"
             variants={staggeredParagraphVariants}
             initial="hidden"
             whileInView="visible"
@@ -136,7 +136,7 @@ export function Contact() {
         </motion.div>
 
         <motion.div 
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16"
+          className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 lg:gap-16"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
@@ -209,15 +209,15 @@ export function Contact() {
                 Hours of Operation
               </h4>
               <div className="space-y-2 text-foreground/70">
-                <div className="flex justify-between">
+                <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:gap-4">
                   <span>Monday - Friday</span>
                   <span>9:00 AM - 7:00 PM</span>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:gap-4">
                   <span>Saturday</span>
                   <span>10:00 AM - 6:00 PM</span>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:gap-4">
                   <span>Sunday</span>
                   <span>By Appointment</span>
                 </div>

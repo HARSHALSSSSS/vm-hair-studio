@@ -121,9 +121,13 @@
   }
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 6.5rem;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground overflow-x-hidden;
+  }
+  section[id] {
+    scroll-margin-top: 6.5rem;
   }
 }
 
@@ -145,13 +149,22 @@
   
   @media (max-width: 640px) {
     .section-overlap {
-      margin-top: -40px;
-      padding-top: 80px;
+      margin-top: -20px;
+      padding-top: 64px;
     }
   }
   
   /* Text stagger animation helper */
   .text-reveal-line {
     @apply overflow-hidden;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
 }

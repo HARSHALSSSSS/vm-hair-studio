@@ -39,7 +39,7 @@ export function Membership() {
           viewport={{ once: true }}
         >
           <motion.h2
-            className="text-4xl sm:text-5xl font-light text-foreground mb-4 tracking-tight"
+            className="text-3xl sm:text-5xl font-light text-foreground mb-4 tracking-tight"
             variants={staggeredParagraphVariants}
             initial="hidden"
             whileInView="visible"
@@ -58,9 +58,46 @@ export function Membership() {
           </motion.p>
         </motion.div>
 
-        {/* Comparison Table */}
+        {/* Mobile Cards */}
+        <div className="grid grid-cols-1 gap-4 md:hidden">
+          {membershipTiers.map((tier, idx) => (
+            <motion.div
+              key={idx}
+              className={`rounded-xl border border-border bg-white p-5 shadow-sm ${
+                tier.highlighted ? 'border-accent/40 bg-accent/5' : ''
+              }`}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex items-start justify-between gap-4 mb-3">
+                <div>
+                  <p className="font-medium text-foreground">{tier.name}</p>
+                  <p className="text-sm text-muted-foreground mt-1">{tier.description}</p>
+                </div>
+                <span className="text-xl sm:text-2xl font-bold text-accent shrink-0">{tier.discount}</span>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {tier.features.map((feature, fidx) => (
+                  <span
+                    key={fidx}
+                    className="inline-block px-3 py-1 text-xs font-medium bg-muted text-muted-foreground rounded-full"
+                  >
+                    {feature}
+                  </span>
+                ))}
+              </div>
+              {tier.condition && (
+                <p className="text-xs text-accent font-semibold mt-3">✓ {tier.condition}</p>
+              )}
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Desktop Comparison Table */}
         <motion.div
-          className="overflow-x-auto rounded-xl border border-border bg-white shadow-sm"
+          className="hidden md:block overflow-x-auto rounded-xl border border-border bg-white shadow-sm"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}

@@ -67,7 +67,7 @@ export function Pricing() {
           viewport={{ once: true }}
         >
           <motion.h2
-            className="text-4xl sm:text-5xl font-light text-foreground mb-4 tracking-tight"
+            className="text-3xl sm:text-5xl font-light text-foreground mb-4 tracking-tight"
             variants={staggeredParagraphVariants}
             initial="hidden"
             whileInView="visible"
@@ -88,7 +88,7 @@ export function Pricing() {
 
         {/* Category Tabs */}
         <motion.div
-          className="flex flex-wrap gap-2 mb-12 justify-center"
+          className="flex flex-nowrap overflow-x-auto snap-x gap-2 mb-12 justify-start sm:justify-center pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 scrollbar-hide"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -113,7 +113,7 @@ export function Pricing() {
 
         {/* Pricing Content */}
         <motion.div
-          className="bg-background rounded-2xl p-8 sm:p-12"
+          className="bg-background rounded-2xl p-4 sm:p-8 lg:p-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}

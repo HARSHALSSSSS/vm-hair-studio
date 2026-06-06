@@ -10,7 +10,7 @@ import { Footer } from '@/components/footer'
 
 export default function Home() {
   return (
-    <main className="w-full overflow-hidden">
+    <main className="w-full overflow-x-hidden">
       <Navbar />
       <Hero />
       <About />

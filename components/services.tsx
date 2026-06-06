@@ -119,7 +119,7 @@ export function Services() {
           viewport={{ once: true }}
         >
           <motion.h2 
-            className="text-4xl sm:text-5xl font-light text-foreground mb-4 tracking-tight"
+            className="text-3xl sm:text-5xl font-light text-foreground mb-4 tracking-tight"
             variants={staggeredParagraphVariants}
             initial="hidden"
             whileInView="visible"
@@ -174,7 +174,7 @@ export function Services() {
                 <div className="relative h-full p-6 sm:p-8 flex flex-col justify-between">
                   {/* Title and Description */}
                   <div>
-                    <h3 className="text-2xl sm:text-3xl font-light text-white mb-2 tracking-tight">
+                    <h3 className="text-xl sm:text-2xl md:text-3xl font-light text-white mb-2 tracking-tight">
                       {category.name}
                     </h3>
                     <p className="text-sm sm:text-base text-white/90">
@@ -188,7 +188,7 @@ export function Services() {
                     whileTap={{ scale: 0.95 }}
                     className="self-start"
                   >
-                    <span className="inline-block bg-accent text-accent-foreground px-5 py-2 rounded-lg font-light text-sm group-hover:bg-accent/90 transition-all duration-300 shadow-md group-hover:shadow-lg">
+                    <span className="inline-flex items-center min-h-11 bg-accent text-accent-foreground px-5 py-2 rounded-lg font-light text-sm group-hover:bg-accent/90 transition-all duration-300 shadow-md group-hover:shadow-lg">
                       Explore Services
                     </span>
                   </motion.div>

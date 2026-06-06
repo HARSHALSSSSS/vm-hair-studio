@@ -12,6 +12,8 @@ const slides = [
   { src: '/hero-slides/6.webp', mobileSrc: '/hero-slides/6-mobile.webp', alt: 'Salon exterior view 6' },
 ] as const
 
+const heroAccentColor = '#D4B896'
+
 function preloadSlide(index: number) {
   const slide = slides[index]
   if (!slide) return
@@ -103,7 +105,7 @@ export function Hero() {
   }, [])
 
   return (
-    <section id="home" className="relative w-full min-h-screen overflow-hidden">
+    <section id="home" className="relative w-full min-h-[100dvh] overflow-hidden">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -139,7 +141,7 @@ export function Hero() {
         }}
       />
 
-      <div className="relative h-screen flex items-center px-4 sm:px-6 lg:px-8">
+      <div className="relative min-h-[100dvh] flex items-center px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-20">
         <div className="max-w-3xl w-full pl-0 sm:pl-4 lg:pl-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -147,7 +149,15 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.1, ease: 'easeOut' }}
             className="mb-6"
           >
-            <span className="inline-block bg-amber-500/20 border border-amber-500/40 text-amber-400 px-4 py-1.5 rounded-full text-sm font-medium tracking-wide">
+            <span
+              className="inline-block px-4 py-1.5 rounded-full text-sm font-semibold tracking-wide"
+              style={{
+                color: heroAccentColor,
+                backgroundColor: 'rgba(212, 184, 150, 0.18)',
+                border: '1px solid rgba(212, 184, 150, 0.5)',
+                textShadow: '0 1px 10px rgba(0, 0, 0, 0.45)',
+              }}
+            >
               Premium Hair Studio in Pune
             </span>
           </motion.div>
@@ -156,16 +166,22 @@ export function Hero() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2, ease: 'easeOut' }}
-            className="text-4xl sm:text-5xl lg:text-7xl font-light text-white mb-6 tracking-tight leading-[1.1] text-balance"
+            className="text-3xl sm:text-5xl lg:text-7xl font-bold text-white mb-6 tracking-tight leading-[1.1] text-balance"
             style={{
               fontFamily: "'Playfair Display', serif",
-              textShadow: '0 4px 20px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.4)',
-              fontWeight: 400,
+              textShadow: '0 4px 20px rgba(0, 0, 0, 0.55), 0 2px 8px rgba(0, 0, 0, 0.45)',
+              fontWeight: 700,
               letterSpacing: '-0.02em',
             }}
           >
             Redefine Your Style with{' '}
-            <span className="text-amber-300" style={{ fontStyle: 'italic' }}>
+            <span
+              style={{
+                color: heroAccentColor,
+                fontStyle: 'italic',
+                textShadow: '0 2px 14px rgba(0, 0, 0, 0.6), 0 0 24px rgba(0, 0, 0, 0.35)',
+              }}
+            >
               Expert Hair Artistry
             </span>
           </motion.h1>
@@ -209,7 +225,7 @@ export function Hero() {
       <motion.div
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute bottom-8 left-8 sm:left-1/2 sm:transform sm:-translate-x-1/2"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden sm:block"
       >
         <div className="text-white/60 text-center">
           <p className="text-xs uppercase tracking-widest mb-3">Scroll to explore</p>

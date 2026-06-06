@@ -6,13 +6,14 @@ export function Footer() {
   return (
     <footer className="bg-foreground text-white py-12 sm:py-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
           {/* Brand */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
+            className="col-span-2 md:col-span-1"
           >
             <div className="flex items-center space-x-3 mb-4">
               <img 
@@ -78,7 +79,7 @@ export function Footer() {
                   key={social}
                   href="#"
                   whileHover={{ scale: 1.1 }}
-                  className="w-10 h-10 rounded-full bg-white/10 hover:bg-accent flex items-center justify-center transition-colors"
+                  className="min-h-11 min-w-11 rounded-full bg-white/10 hover:bg-accent flex items-center justify-center transition-colors"
                   aria-label={social}
                 >
                   <svg

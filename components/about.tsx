@@ -15,7 +15,7 @@ export function About() {
           viewport={{ once: true }}
         >
           <motion.h2 
-            className="text-4xl sm:text-5xl font-light text-foreground mb-4 tracking-tight"
+            className="text-3xl sm:text-5xl font-light text-foreground mb-4 tracking-tight"
             variants={staggeredParagraphVariants}
             initial="hidden"
             whileInView="visible"
@@ -48,7 +48,7 @@ export function About() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, ease: 'easeOut' }}
             viewport={{ once: true, margin: '0px 0px -100px 0px' }}
-            className="relative h-80 sm:h-96 rounded-xl overflow-hidden"
+            className="relative w-full aspect-[4/3] rounded-xl overflow-hidden"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20" />
             <div
@@ -145,7 +145,7 @@ export function About() {
               viewport={{ once: true }}
               className="text-center"
             >
-              <p className="text-4xl font-light text-primary mb-2">{stat.number}</p>
+              <p className="text-3xl sm:text-4xl font-light text-primary mb-2">{stat.number}</p>
               <p className="text-muted-foreground">{stat.label}</p>
             </motion.div>
           ))}

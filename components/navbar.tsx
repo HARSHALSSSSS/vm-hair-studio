@@ -33,7 +33,7 @@ export function Navbar() {
       <div className="max-w-6xl mx-auto">
         {/* Floating Glass Navbar - subtle and smooth */}
         <div className={`${scrolled ? 'bg-background/95 shadow-lg' : 'bg-background/70'} backdrop-blur-md border border-border/50 rounded-2xl transition-all duration-500`}>
-          <div className="px-6 sm:px-8 py-3">
+          <div className="px-4 sm:px-8 py-3">
             <div className="flex justify-between items-center">
               {/* Logo */}
               <a
@@ -77,7 +77,7 @@ export function Navbar() {
               {/* Mobile Menu Button */}
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="md:hidden p-2 rounded-lg hover:bg-muted/50 transition-colors duration-300"
+                className="md:hidden p-3 min-h-11 min-w-11 flex items-center justify-center rounded-lg hover:bg-muted/50 transition-colors duration-300"
                 aria-label="Toggle menu"
               >
                 <svg

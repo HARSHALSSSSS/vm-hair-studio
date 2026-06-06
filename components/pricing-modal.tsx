@@ -81,12 +81,12 @@ export function PricingModal({ isOpen, onClose, category }: PricingModalProps) {
           >
             <div
               onClick={(e) => e.stopPropagation()}
-              className="bg-background rounded-xl shadow-xl max-w-2xl w-full max-h-[80vh] overflow-y-auto"
+              className="bg-background rounded-xl shadow-xl max-w-2xl w-full max-h-[85dvh] overflow-y-auto"
             >
               {/* Modal Header */}
-              <div className="sticky top-0 bg-white border-b border-border px-6 sm:px-8 py-6 flex justify-between items-center">
-                <div>
-                  <h2 className="text-2xl sm:text-3xl font-light text-foreground">
+              <div className="sticky top-0 bg-white border-b border-border px-4 sm:px-8 py-4 sm:py-6 flex justify-between items-start sm:items-center gap-4">
+                <div className="min-w-0">
+                  <h2 className="text-xl sm:text-3xl font-light text-foreground">
                     {category.name}
                   </h2>
                   <p className="text-sm text-muted-foreground mt-1">
@@ -95,7 +95,7 @@ export function PricingModal({ isOpen, onClose, category }: PricingModalProps) {
                 </div>
                 <button
                   onClick={onClose}
-                  className="p-2 hover:bg-muted rounded-lg transition-colors text-foreground/60 hover:text-foreground"
+                  className="p-3 min-h-11 min-w-11 shrink-0 flex items-center justify-center hover:bg-muted rounded-lg transition-colors text-foreground/60 hover:text-foreground"
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -104,7 +104,7 @@ export function PricingModal({ isOpen, onClose, category }: PricingModalProps) {
               </div>
 
               {/* Modal Content */}
-              <div className="p-6 sm:p-8 space-y-8">
+              <div className="p-4 sm:p-8 space-y-8">
                 {category.subcategories.map((subcatId) => {
                   const items = pricingData[subcatId as keyof typeof pricingData] as any[]
                   return (
@@ -124,9 +124,9 @@ export function PricingModal({ isOpen, onClose, category }: PricingModalProps) {
                             initial={{ opacity: 0, x: -10 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: idx * 0.05 }}
-                            className="flex justify-between items-start py-2 border-b border-border/30 last:border-0"
+                            className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:items-start py-2 border-b border-border/30 last:border-0"
                           >
-                            <span className="text-sm text-foreground/80 flex-1 pr-4">
+                            <span className="text-sm text-foreground/80 flex-1 sm:pr-4">
                               {item.service || item.brand || ''}
                               {item.brand && item.short && (
                                 <span className="text-xs text-muted-foreground ml-2 block">
@@ -134,7 +134,7 @@ export function PricingModal({ isOpen, onClose, category }: PricingModalProps) {
                                 </span>
                               )}
                             </span>
-                            <span className="font-light text-primary ml-3 flex-shrink-0 whitespace-nowrap text-sm">
+                            <span className="font-light text-primary sm:ml-3 shrink-0 text-sm">
                               {renderPrice(item)}
                             </span>
                           </motion.div>

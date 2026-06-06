@@ -61,7 +61,7 @@ const colors = [
 ]
 
 export function Team() {
-  const [hoveredId, setHoveredId] = useState<string | null>(null)
+  const [activeBioId, setActiveBioId] = useState<string | null>(null)
   const [teamMembers, setTeamMembers] = useState<TeamMember[]>(DEFAULT_TEAM)
 
   useEffect(() => {
@@ -82,7 +82,7 @@ export function Team() {
           viewport={{ once: true }}
         >
           <motion.h2 
-            className="text-4xl sm:text-5xl font-light text-foreground mb-4 tracking-tight"
+            className="text-3xl sm:text-5xl font-light text-foreground mb-4 tracking-tight"
             variants={staggeredParagraphVariants}
             initial="hidden"
             whileInView="visible"
@@ -126,16 +126,16 @@ export function Team() {
                     />
                   </div>
                   {/* Gold badge */}
-                  <div className="absolute top-4 left-4 bg-gradient-to-r from-amber-500 to-yellow-400 text-black px-4 py-1.5 rounded-full text-sm font-semibold shadow-lg">
+                  <div className="absolute top-3 left-3 sm:top-4 sm:left-4 bg-gradient-to-r from-amber-500 to-yellow-400 text-black px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs sm:text-sm font-semibold shadow-lg max-w-[calc(100%-1.5rem)]">
                     Founder & Owner
                   </div>
                 </div>
                 
                 {/* Owner Info */}
-                <div className="lg:w-1/2 p-8 lg:p-12 flex flex-col justify-center">
+                <div className="lg:w-1/2 p-6 sm:p-8 lg:p-12 flex flex-col justify-center">
                   <div className="space-y-6">
                     <div>
-                      <h3 className="text-3xl lg:text-4xl font-light text-foreground mb-2">
+                      <h3 className="text-2xl sm:text-3xl lg:text-4xl font-light text-foreground mb-2">
                         {OWNER.name}
                       </h3>
                       <p className="text-primary font-medium text-lg">
@@ -148,18 +148,18 @@ export function Team() {
                     </p>
                     
                     {/* Stats/Highlights */}
-                    <div className="grid grid-cols-3 gap-4 pt-4 border-t border-border">
+                    <div className="grid grid-cols-3 gap-2 sm:gap-4 pt-4 border-t border-border">
                       <div className="text-center">
-                        <div className="text-2xl font-light text-primary">10+</div>
-                        <div className="text-xs text-muted-foreground uppercase tracking-wider">Years Exp</div>
+                        <div className="text-lg sm:text-2xl font-light text-primary">10+</div>
+                        <div className="text-[10px] sm:text-xs text-muted-foreground uppercase tracking-wider">Years Exp</div>
                       </div>
                       <div className="text-center">
-                        <div className="text-2xl font-light text-primary">5000+</div>
-                        <div className="text-xs text-muted-foreground uppercase tracking-wider">Clients</div>
+                        <div className="text-lg sm:text-2xl font-light text-primary">5000+</div>
+                        <div className="text-[10px] sm:text-xs text-muted-foreground uppercase tracking-wider">Clients</div>
                       </div>
                       <div className="text-center">
-                        <div className="text-2xl font-light text-primary">Master</div>
-                        <div className="text-xs text-muted-foreground uppercase tracking-wider">Certified</div>
+                        <div className="text-lg sm:text-2xl font-light text-primary">Master</div>
+                        <div className="text-[10px] sm:text-xs text-muted-foreground uppercase tracking-wider">Certified</div>
                       </div>
                     </div>
                     
@@ -219,9 +219,12 @@ export function Team() {
             <motion.div
               key={member.id}
               variants={itemVariants}
-              onMouseEnter={() => setHoveredId(member.id)}
-              onMouseLeave={() => setHoveredId(null)}
-              className="group"
+              onMouseEnter={() => setActiveBioId(member.id)}
+              onMouseLeave={() => setActiveBioId(null)}
+              onClick={() =>
+                setActiveBioId((current) => (current === member.id ? null : member.id))
+              }
+              className="group cursor-pointer md:cursor-default"
               whileHover={{ y: -10 }}
               transition={{ duration: 0.3 }}
             >
@@ -229,7 +232,7 @@ export function Team() {
                 {/* Avatar with image or gradient background */}
                 <div
                   className={`w-full aspect-square flex items-center justify-center bg-gradient-to-br ${colors[idx % colors.length]} transition-all duration-500 transform ${
-                    hoveredId === member.id ? 'scale-110' : 'scale-100'
+                    activeBioId === member.id ? 'scale-110' : 'scale-100'
                   }`}
                 >
                   {member.image ? (
@@ -245,13 +248,13 @@ export function Team() {
                   )}
                 </div>
 
-                {/* Overlay on hover */}
-                {hoveredId === member.id && (
+                {/* Desktop hover overlay */}
+                {activeBioId === member.id && (
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="absolute inset-0 bg-primary/80 flex items-center justify-center"
+                    className="absolute inset-0 bg-primary/80 hidden md:flex items-center justify-center"
                   >
                     <div className="text-center text-white px-4">
                       <p className="text-sm font-light">{member.bio}</p>
@@ -271,13 +274,17 @@ export function Team() {
                   {member.specialty}
                 </p>
 
+                <p className="md:hidden text-sm text-muted-foreground leading-relaxed mb-3">
+                  {member.bio}
+                </p>
+
                 {/* Social links (placeholder) */}
                 <div className="flex justify-center gap-3">
                   {['instagram', 'facebook'].map((social) => (
                     <motion.button
                       key={social}
                       whileHover={{ scale: 1.2 }}
-                      className="w-8 h-8 rounded-full bg-muted hover:bg-primary hover:text-primary-foreground flex items-center justify-center transition-all duration-200"
+                      className="min-h-11 min-w-11 rounded-full bg-muted hover:bg-primary hover:text-primary-foreground flex items-center justify-center transition-all duration-200"
                       aria-label={`Visit ${social}`}
                     >
                       <svg

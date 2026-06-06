@@ -156,7 +156,7 @@ export default function ManageTeamPage() {
     <div className="min-h-screen bg-background py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
           <div>
             <h1 className="text-3xl font-light text-foreground">Manage Team</h1>
             <p className="text-muted-foreground mt-1">Add, edit, or remove team members</p>
@@ -390,7 +390,7 @@ export default function ManageTeamPage() {
                   <div className="flex gap-2 flex-shrink-0">
                     <button
                       onClick={() => handleEdit(member)}
-                      className="p-2 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-lg transition-all"
+                      className="p-3 min-h-11 min-w-11 flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-lg transition-all"
                       title="Edit"
                     >
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -399,7 +399,7 @@ export default function ManageTeamPage() {
                     </button>
                     <button
                       onClick={() => handleDelete(member.id)}
-                      className="p-2 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-lg transition-all"
+                      className="p-3 min-h-11 min-w-11 flex items-center justify-center text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-lg transition-all"
                       title="Delete"
                     >
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
