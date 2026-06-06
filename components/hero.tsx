@@ -12,7 +12,7 @@ const slides = [
   { src: '/hero-slides/6.webp', mobileSrc: '/hero-slides/6-mobile.webp', alt: 'Salon exterior view 6' },
 ] as const
 
-const heroAccentColor = '#D4B896'
+const heroAccentColor = '#E5E7EB'
 
 function preloadSlide(index: number) {
   const slide = slides[index]
@@ -153,9 +153,9 @@ export function Hero() {
               className="inline-block px-4 py-1.5 rounded-full text-sm font-semibold tracking-wide"
               style={{
                 color: heroAccentColor,
-                backgroundColor: 'rgba(212, 184, 150, 0.18)',
-                border: '1px solid rgba(212, 184, 150, 0.5)',
-                textShadow: '0 1px 10px rgba(0, 0, 0, 0.45)',
+                backgroundColor: 'rgba(255, 255, 255, 0.12)',
+                border: '1px solid rgba(229, 231, 235, 0.45)',
+                textShadow: '0 1px 10px rgba(0, 0, 0, 0.5)',
               }}
             >
               Premium Hair Studio in Pune
@@ -179,7 +179,7 @@ export function Hero() {
               style={{
                 color: heroAccentColor,
                 fontStyle: 'italic',
-                textShadow: '0 2px 14px rgba(0, 0, 0, 0.6), 0 0 24px rgba(0, 0, 0, 0.35)',
+                textShadow: '0 2px 16px rgba(0, 0, 0, 0.65), 0 0 20px rgba(0, 0, 0, 0.4)',
               }}
             >
               Expert Hair Artistry
