@@ -14,7 +14,7 @@ interface TeamMember {
   isOwner?: boolean
 }
 
-const TEAM_STORAGE_KEY = 'viraaj_team_members'
+const TEAM_STORAGE_KEY = 'viraaj_team_members_v2'
 
 const OWNER: TeamMember = {
   id: 'owner',
@@ -29,25 +29,25 @@ const OWNER: TeamMember = {
 const DEFAULT_TEAM: TeamMember[] = [
   {
     id: '1',
-    name: 'Ashu',
-    designation: 'Manager',
-    specialty: "Mens Hairdresser & Beautician",
-    bio: "Skilled in men's haircuts, styling, and grooming. Dedicated to delivering sharp, modern looks with attention to detail.",
-    image: '/images/team/manager.jpeg',
+    name: 'Anmol',
+    designation: 'Mens Hairdresser',
+    specialty: 'Hair Cutting & Styling',
+    bio: "Passionate about creating fresh, trendy hairstyles. Specializes in precision cuts and modern men's styling techniques.",
+    image: '/images/team/anmol.png',
   },
   {
     id: '2',
-    name: 'Anmol',
-    designation: 'Mens Hairdresser',
-    specialty: "Hair Cutting & Styling",
-    bio: "Passionate about creating fresh, trendy hairstyles. Specializes in precision cuts and modern men's styling techniques.",
-    image: '/images/team/anmol.png',
+    name: 'Ashu',
+    designation: 'Manager',
+    specialty: 'Mens Hairdresser & Beautician',
+    bio: "Skilled in men's haircuts, styling, and grooming. Dedicated to delivering sharp, modern looks with attention to detail.",
+    image: '/images/team/ashu.png',
   },
   {
     id: '3',
     name: 'Sunil',
     designation: 'Unisex Hairdresser',
-    specialty: "All Hair Types & Styles",
+    specialty: 'All Hair Types & Styles',
     bio: "Versatile stylist skilled in both men's and women's haircuts. Creates personalized looks for every client.",
     image: '/images/team/sunil.png',
   },

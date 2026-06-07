@@ -13,40 +13,32 @@ interface TeamMember {
   image: string | null
 }
 
-const TEAM_STORAGE_KEY = 'viraaj_team_members'
+const TEAM_STORAGE_KEY = 'viraaj_team_members_v2'
 
 const DEFAULT_TEAM: TeamMember[] = [
   {
     id: '1',
-    name: 'Sophie Laurent',
-    designation: 'Senior Stylist',
-    specialty: 'Color & Styling Specialist',
-    bio: 'Award-winning colorist with 12+ years of experience in advanced techniques and creative color design.',
-    image: null,
+    name: 'Anmol',
+    designation: 'Mens Hairdresser',
+    specialty: 'Hair Cutting & Styling',
+    bio: "Passionate about creating fresh, trendy hairstyles. Specializes in precision cuts and modern men's styling techniques.",
+    image: '/images/team/anmol.png',
   },
   {
     id: '2',
-    name: 'Marcus Chen',
-    designation: 'Creative Director',
-    specialty: 'Master Stylist & Mentor',
-    bio: 'Founder & creative director. Specializes in precision cuts and transformative style consultations.',
-    image: null,
+    name: 'Ashu',
+    designation: 'Manager',
+    specialty: 'Mens Hairdresser & Beautician',
+    bio: "Skilled in men's haircuts, styling, and grooming. Dedicated to delivering sharp, modern looks with attention to detail.",
+    image: '/images/team/ashu.png',
   },
   {
     id: '3',
-    name: 'Elena Rodriguez',
-    designation: 'Bridal Specialist',
-    specialty: 'Bridal & Event Specialist',
-    bio: 'Expert in creating stunning bridal looks and special occasion styling for unforgettable moments.',
-    image: null,
-  },
-  {
-    id: '4',
-    name: 'James Mitchell',
-    designation: 'Grooming Expert',
-    specialty: "Men's Grooming Expert",
-    bio: "Certified in men's barbering and grooming with a passion for classic and modern styles.",
-    image: null,
+    name: 'Sunil',
+    designation: 'Unisex Hairdresser',
+    specialty: 'All Hair Types & Styles',
+    bio: "Versatile stylist skilled in both men's and women's haircuts. Creates personalized looks for every client.",
+    image: '/images/team/sunil.png',
   },
 ]
 
