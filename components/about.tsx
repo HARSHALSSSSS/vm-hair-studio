@@ -42,21 +42,19 @@ export function About() {
           viewport={{ once: true }}
           className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center"
         >
-          {/* Image */}
-          <motion.div 
+          {/* Brand Logo */}
+          <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, ease: 'easeOut' }}
             viewport={{ once: true, margin: '0px 0px -100px 0px' }}
-            className="relative w-full aspect-[4/3] rounded-xl overflow-hidden"
+            className="relative w-full aspect-[4/3] rounded-xl overflow-hidden border border-border/60 bg-[#0a0a0a] shadow-sm flex items-center justify-center p-8 sm:p-12"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20" />
-            <div
-              className="w-full h-full bg-cover bg-center"
-              style={{
-                backgroundImage:
-                  'linear-gradient(135deg, #8b7d72 0%, #b8a596 100%)',
-              }}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-accent/15 pointer-events-none" />
+            <img
+              src="/images/logo.jpeg"
+              alt="VM Hair Studio Logo"
+              className="relative z-10 w-[min(72%,240px)] sm:w-[min(68%,280px)] aspect-square rounded-full object-cover border-2 border-primary/30 shadow-lg"
             />
           </motion.div>
 
